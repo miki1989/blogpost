@@ -1,0 +1,22 @@
+{% extends 'bloger/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+	<p><h2>Post: {{ blogpost.title }}</h2></p>
+
+		<div class="card mb-3">
+			<h4 class="card-header">
+				{{ blogpost.date_added|date:'M d, Y H:i' }}
+				{{ blogpost.text|linebreaks }}
+			</h4>
+		</div>
+		{% if user.is_authenticated  and blogpost.owner == request.user %}
+			<p>
+				<small><a href="{% url 'bloger:edit_blogpost' blogpost.id %}">Edit post</a></small>
+		{% endif %}
+			
+
+{% endblock content %}
+
+

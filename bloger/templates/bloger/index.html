@@ -1,0 +1,35 @@
+{% extends "bloger/base.html" %}
+
+{% block page_header %}
+	<div class="jumbotron">
+		<h1 class="display-3">Blog page</h1>
+		
+		<p class="lead">Read and write posts about interesting topics.</p>
+		
+		<a class="btn btn-lg btn-primary" href="{% url 'users:register' %}"
+			role="button">Register &raquo;</a>
+	</div>
+{% endblock page_header %}
+
+{% block content %}
+
+	<h1>Posts</h1>
+		{% for blogpost in blogposts %}
+			<li><h3>
+				<a href="{% url 'bloger:blogpost' blogpost.id %}">{{ blogpost.title }}</a>
+			</h3></li>
+				<div class="card mb-3">
+					<h4 class="card-header">
+						{{ blogpost.date_added|date:'M d, Y H:i' }}
+					</h4>
+				</div>
+				{% if user.is_authenticated %}
+					<small><a href="{% url 'bloger:new_blogpost' %}">Add a new post</a></small>
+				{% endif %}
+			</li>
+		{% empty %}
+			<li><h3>No posts have been added yet.</h3></li>
+		{% endfor %}
+	
+
+{% endblock content %}

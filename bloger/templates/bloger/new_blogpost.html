@@ -1,0 +1,15 @@
+{% extends "bloger/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+	<p><h2>Add a new post:</h2></p>
+
+	<form action="{% url 'bloger:new_blogpost' %}" method="post" class="form">
+		{% csrf_token %}
+		{% bootstrap_form form %}
+        {% buttons %}
+            <button name="submit" class ="btn btn-primary">Add post</button>
+        {% endbuttons %}
+	</form>
+
+{% endblock content %}
